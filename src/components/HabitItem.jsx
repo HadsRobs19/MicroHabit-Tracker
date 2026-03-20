@@ -1,3 +1,4 @@
+// ...existing code...
 function HabitItem({ habit, onToggle, onDelete }) {
   return (
     <li className={`habit-item ${habit.completed ? 'completed' : ''}`}>
@@ -5,13 +6,13 @@ function HabitItem({ habit, onToggle, onDelete }) {
         <input
           type="checkbox"
           checked={habit.completed}
-          onChange={onToggle}
+          onChange={() => onToggle && onToggle(habit.id)}
           className="habit-checkbox"
         />
         <span className="habit-name">{habit.name}</span>
       </label>
       <button
-        onClick={onDelete}
+        onClick={() => onDelete && onDelete(habit.id)}
         className="habit-delete"
         aria-label="Delete habit"
       >

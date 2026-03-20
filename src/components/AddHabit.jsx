@@ -1,14 +1,23 @@
 import { useState } from 'react'
 
-function AddHabit({ onAddHabit }) {
+function AddHabit({ onAddHabit, onAdd }) {
   const [habitName, setHabitName] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (habitName.trim()) {
-      onAddHabit(habitName.trim())
-      setHabitName('')
+    const name = habitName.trim()
+    if (!name) return
+
+    const addFn = onAddHabit ?? onAdd
+    if (typeof addFn === 'function') {
+      addFn(name)
+    } else {
+      // safety: if no handler provided, log to console for debugging
+      // (won't affect styling)
+      console.warn('AddHabit: no add handler provided')
     }
+
+    setHabitName('')
   }
 
   return (
