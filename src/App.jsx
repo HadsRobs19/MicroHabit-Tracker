@@ -8,7 +8,6 @@ function getTodayKey() {
 }
 
 function normalizeHabit(habit) {
-  // migrate older boolean `completed` -> completions map (marking today if true)
   if (habit && typeof habit.completions === 'object') return habit
   const completions = {}
   if (habit && 'completed' in habit && habit.completed) {
@@ -24,14 +23,12 @@ function App() {
     { id: 3, name: 'Take a short walk', completions: {} },
   ]
 
-  // lazy init from storage, fallback to defaults, normalize shape
   const [habits, setHabits] = useState(() => {
     const saved = storage.loadHabits()
     const source = saved && saved.length ? saved : defaultHabits
     return source.map(normalizeHabit)
   })
 
-  // persist whenever habits change
   useEffect(() => {
     storage.saveHabits(habits)
   }, [habits])
@@ -52,10 +49,8 @@ function App() {
         if (habit.id !== id) return habit
         const completions = { ...(habit.completions || {}) }
         if (completions[today]) {
-          // unmark today
           delete completions[today]
         } else {
-          // mark today complete
           completions[today] = true
         }
         return { ...habit, completions }
@@ -63,8 +58,22 @@ function App() {
     )
   }
 
+  const editHabit = (id, newName) => {
+    setHabits((prev) => {
+      const next = prev.map((h) => (h.id === id ? { ...h, name: newName } : h))
+      storage.saveHabits(next)
+      return next
+    })
+  }
+
   const deleteHabit = (id) => {
-    setHabits((prev) => prev.filter((habit) => habit.id !== id))
+    const ok = window.confirm('Delete this habit? This cannot be undone.')
+    if (!ok) return
+    setHabits((prev) => {
+      const next = prev.filter((habit) => habit.id !== id)
+      storage.saveHabits(next)
+      return next
+    })
   }
 
   return (
@@ -73,6 +82,7 @@ function App() {
       onAddHabit={addHabit}
       onToggleHabit={toggleHabit}
       onDeleteHabit={deleteHabit}
+      onEditHabit={editHabit}
     />
   )
 }

@@ -101,7 +101,7 @@
 .habit-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   padding: 1rem;
   border-bottom: 1px solid #f0f0f0;
   transition: background-color 0.2s;
@@ -125,7 +125,15 @@
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.add-habit-input {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  box-sizing: border-box;
 }
 
 .habit-checkbox {
@@ -135,8 +143,71 @@
   accent-color: #667eea;
 }
 
+.habit-meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+  max-width: 160px; /* limit meta width so name gets priority */
+}
+
+.habit-item > div:last-child {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
 .habit-name {
   font-size: 1rem;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* show up to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.add-habit-input {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+.habit-edit {
+  padding: 0.4rem 0.75rem;
+  background: linear-gradient(135deg, #5673e6 0%, #6b4bd1 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  opacity: 0.95;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.habit-edit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(86,115,230,0.18);
+}
+
+.habit-cancel {
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.habit-cancel:hover {
+  background: #f6f6f6;
   color: #333;
 }
 

@@ -1,6 +1,6 @@
 import HabitItem from './HabitItem'
 
-function HabitList({ habits, onToggleHabit, onDeleteHabit }) {
+function HabitList({ habits, onToggleHabit, onDeleteHabit, onEditHabit }) {
   if (habits.length === 0) {
     return (
       <div className="habit-list-empty">
@@ -15,8 +15,9 @@ function HabitList({ habits, onToggleHabit, onDeleteHabit }) {
         <HabitItem
           key={habit.id}
           habit={habit}
-          onToggle={onToggleHabit}   // pass handler that accepts id
-          onDelete={onDeleteHabit}   // pass handler that accepts id
+          onToggle={onToggleHabit}
+          onDelete={onDeleteHabit}
+          onEdit={onEditHabit}
         />
       ))}
     </ul>

@@ -1,7 +1,8 @@
 import HabitList from '../components/HabitList'
 import AddHabit from '../components/AddHabit'
+import DailyProgress from '../components/DailyProgress'
 
-function Home({ habits, onAddHabit, onToggleHabit, onDeleteHabit }) {
+function Home({ habits, onAddHabit, onToggleHabit, onDeleteHabit, onEditHabit }) {
   return (
     <div className="home">
       <header className="hero">
@@ -14,11 +15,21 @@ function Home({ habits, onAddHabit, onToggleHabit, onDeleteHabit }) {
       <main className="main-content">
         <section className="habits-section">
           <h2>Your Daily Habits</h2>
+
+          {/* Daily progress summary with spacing below */}
+          <div style={{ marginBottom: 16 }}>
+            <DailyProgress habits={habits} />
+          </div>
+
+          {/* Add habit form */}
           <AddHabit onAddHabit={onAddHabit} />
+
+          {/* Habit list */}
           <HabitList
             habits={habits}
             onToggleHabit={onToggleHabit}
             onDeleteHabit={onDeleteHabit}
+            onEditHabit={onEditHabit}
           />
         </section>
       </main>
