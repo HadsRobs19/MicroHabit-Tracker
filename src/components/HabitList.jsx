@@ -15,8 +15,8 @@ function HabitList({ habits, onToggleHabit, onDeleteHabit }) {
         <HabitItem
           key={habit.id}
           habit={habit}
-          onToggle={() => onToggleHabit(habit.id)}
-          onDelete={() => onDeleteHabit(habit.id)}
+          onToggle={onToggleHabit}   // pass handler that accepts id
+          onDelete={onDeleteHabit}   // pass handler that accepts id
         />
       ))}
     </ul>
