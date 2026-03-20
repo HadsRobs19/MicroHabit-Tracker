@@ -236,24 +236,83 @@
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .app-title {
-    font-size: 2rem;
-  }
 
-  .app-description {
-    font-size: 1rem;
-  }
-
+/* Tablet: slightly tighter layout, give name more room by reducing meta width */
+@media (max-width: 900px) {
   .habits-section {
     padding: 1.5rem;
+    max-width: 720px;
   }
 
-  .add-habit-form {
+  .habit-meta {
+    max-width: 120px; /* free more room for the habit name */
+    gap: 6px;
+  }
+
+  .habit-edit, .habit-delete, .habit-cancel {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+  }
+}
+
+/* Mobile: stack elements so name gets priority, hide tiny calendar dots to avoid clutter */
+@media (max-width: 480px) {
+  .habits-section {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .habit-item {
     flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 0.75rem;
   }
 
-  .add-habit-button {
+  .habit-label {
     width: 100%;
+    gap: 0.5rem;
+  }
+
+  /* make checkbox + name row compact but let name wrap cleanly */
+  .habit-label > .habit-checkbox {
+    flex: 0 0 auto;
+  }
+
+  .habit-name {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 3; /* allow a bit more vertical space on mobile */
+  }
+
+  .add-habit-input {
+    width: 100%;
+  }
+
+  /* keep meta and controls each on their own row */
+  .habit-meta {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-right: 0;
+    max-width: none;
+  }
+
+  /* hide compact calendar dots to preserve readability on small screens */
+  .habit-calendar {
+    display: none;
+  }
+
+  .habit-item > div:last-child {
+    order: 3;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .habit-edit, .habit-delete, .habit-cancel {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
   }
 }
