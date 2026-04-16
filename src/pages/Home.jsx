@@ -1,6 +1,7 @@
 import HabitList from '../components/HabitList'
 import AddHabit from '../components/AddHabit'
 import DailyProgress from '../components/DailyProgress'
+import DailyQuote from '../components/DailyQuote'
 
 function Home({ habits, onAddHabit, onToggleHabit, onDeleteHabit, onEditHabit }) {
   return (
@@ -15,6 +16,9 @@ function Home({ habits, onAddHabit, onToggleHabit, onDeleteHabit, onEditHabit })
       <main className="main-content">
         <section className="habits-section">
           <h2>Your Daily Habits</h2>
+
+          {/* Daily motivational quote from API */}
+          <DailyQuote />
 
           {/* Daily progress summary with spacing below */}
           <div style={{ marginBottom: 16 }}>
