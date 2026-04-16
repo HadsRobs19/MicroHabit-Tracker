@@ -1,103 +1,67 @@
 # MicroHabit
 
-MicroHabit helps you build better routines by tracking small daily habits. Start with tiny, manageable habits and watch them compound into lasting positive changes.
+MicroHabit helps you build better routines by tracking small, daily micro-habits. Create custom habits, mark them complete each day, and monitor short-term progress with a compact 7-day view and streak counter. Data is stored locally so your habits and daily completions persist across refreshes.
 
 ## Features
+- Add custom micro-habits (create)
+- Daily tracking with a checkbox per habit (update)
+- Per-habit 7-day visualization and current streak
+- Overall daily progress summary (count + progress bar)
+- Inline edit and delete habit (edit, delete)
+- Responsive layout (desktop, tablet, mobile)
+- Local data persistence using localStorage
 
-- **Add Custom Habits** - Create personalized micro habits tailored to your goals
-- **Daily Tracking** - Mark habits as complete with a simple checkbox interface
-- **Progress Visualization** - See your daily progress at a glance
-- **Habit Management** - Easily add, edit, or remove habits as your routine evolves
-- **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+## Technologies
+- React 18 (functional components + hooks)
+- Vite (dev server & build)
+- CSS3 for styling and responsive rules
+- Plain browser localStorage for persistence (no backend)
 
-## Tech Stack
-
-- **React 18** - Modern React with functional components and hooks
-- **Vite** - Fast build tool and development server
-- **CSS3** - Custom styling with gradients and responsive design
-- **ESLint** - Code quality and consistency
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
+## Setup / Run locally
+1. Clone the repo:
    ```bash
    git clone https://github.com/yourusername/microhabit.git
    cd microhabit
    ```
-
 2. Install dependencies:
    ```bash
    npm install
    ```
-
-3. Start the development server:
+3. Start dev server:
    ```bash
    npm run dev
    ```
+4. Open: http://localhost:5173
 
-4. Open your browser and visit `http://localhost:5173`
-
-## Deployment
-
-### Build for Production
-
+Build for production:
 ```bash
 npm run build
 ```
-
-This creates an optimized production build in the `dist` folder.
-
-### Preview Production Build
-
+Preview production build:
 ```bash
 npm run preview
 ```
 
-### Deploy to Vercel
+## Data persistence details
+- All habits and daily completions are saved in localStorage under the key: `microhabits_v1`
+- Habit shape example:
+  ```json
+  {
+    "id": 1679680000000,
+    "name": "Drink water",
+    "completions": { "2026-03-23": true, "2026-03-22": true }
+  }
+  ```
 
-1. Push your code to GitHub
-2. Import your repository on [Vercel](https://vercel.com)
-3. Vercel will auto-detect Vite and configure the build settings
-4. Click Deploy
+## Known bugs / limitations
+- Data is stored only in the current browser and device (localStorage); no sync across devices.
+- Manual edits to older dates require editing localStorage (no calendar editor yet).
+- Very long habit names are clamped to two lines; extremely long text may still truncate on very small screens.
+- No user authentication or backup/export feature yet.
 
-### Deploy to Netlify
+## What I learned
+Working on MicroHabit reinforced the value of small, testable features: adding persistence early prevents lost work and simplifies later features. Building the 7-day visualization taught me careful data-shape design and clean migration for older data shapes. Implementing responsive layouts highlighted the trade-offs between readability and compactness on mobile and tablet views. The project improved my ability to iterate quickly while keeping state and UI predictable.
 
-1. Push your code to GitHub
-2. Import your repository on [Netlify](https://netlify.com)
-3. Set build command: `npm run build`
-4. Set publish directory: `dist`
-5. Click Deploy
-
-## Project Structure
-
-```
-microhabit/
-├── public/
-│   └── vite.svg
-├── src/
-│   ├── components/
-│   │   ├── AddHabit.jsx
-│   │   ├── HabitItem.jsx
-│   │   └── HabitList.jsx
-│   ├── pages/
-│   │   └── Home.jsx
-│   ├── App.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-## License
-
-MIT
+## Deployment
+- Deploy the built `dist` folder to Netlify.
+- Set the build command to `npm run build` and publish the `dist` directory.
